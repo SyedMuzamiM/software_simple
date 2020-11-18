@@ -1,25 +1,36 @@
 package main
 
 import (
-	"fmt"
+	"log"
+	"net/http"
+
 	"github.com/SyedMuzamiM/software_simple/data"
+	"github.com/gorilla/mux"
 )
 
-func main() {
-	fmt.Println("Welcome to the app")
-	grower := data.Grower{
-		ID: "F0123",
-		Name: "Nazir Ahmad",
-		Adress: "Sherpora",
-		Phone: 8493886280,
-		Delivery: data.Delivery{
-				ID: 1,
-				DriverName: "Syed",
-				VechileNo: "JK13F 0482",
-				Mobile: 8082008463,
-				ItemQty: 120,
-				ItemName: "Apple",
-			},
+type Growers struct {
+	l *log.Logger
+}
+
+// getProducts returns the products from the data store
+func (g *Growers) ProductHandler(rw http.ResponseWriter, r *http.Request) {
+	g.l.Println("Handle GET Products")
+
+	// fetch the products from the datastore
+	lp := data.GetGrowers()
+
+	// serialize the list to JSON
+	err := lp.ToJSON(rw)
+	if err != nil {
+		http.Error(rw, "Unable to marshal json", http.StatusInternalServerError)
 	}
-	fmt.Println(grower.ID, grower.Deliveries.ID)
+}
+
+func main() {
+
+	// Maybe I am gonna use the Fiber framework
+	r := mux.NewRouter()
+	r.HandleFunc("/api/grower", ProductHandler)
+
+	log.Fatal(http.ListenAndServe(":8000", r))
 }
