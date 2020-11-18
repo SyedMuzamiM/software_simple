@@ -40,7 +40,7 @@ type Growers []*Grower
 // this reduces allocations and the overheads of the service
 //
 // https://golang.org/pkg/encoding/json/#NewEncoder
-func (g *Grower) ToJSON(r io.Writer) error {
+func (g *Growers) ToJSON(r io.Writer) error {
 	e := json.NewEncoder(r)
 	return e.Encode(g)
 }
