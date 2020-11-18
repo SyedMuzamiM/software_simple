@@ -8,10 +8,10 @@ type Grower struct {
 	Name string
 	Adress string
 	Phone int64
-	Deliveries 
+	Delivery
 }
 
-type Deliveries struct {
+type Delivery struct {
 	ID int
 	DriverName string
 	Mobile int
