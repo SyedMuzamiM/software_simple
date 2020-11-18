@@ -8,19 +8,13 @@ import (
 	"github.com/gorilla/mux"
 )
 
-type Growers struct {
-	l *log.Logger
-}
-
 // getProducts returns the products from the data store
-func (g *Growers) ProductHandler(rw http.ResponseWriter, r *http.Request) {
-	g.l.Println("Handle GET Products")
-
+func ProductHandler(rw http.ResponseWriter, r *http.Request) {
 	// fetch the products from the datastore
-	lp := data.GetGrowers()
-
+	lg := data.GetGrowers()
+	log.Println(lg)
 	// serialize the list to JSON
-	err := lp.ToJSON(rw)
+	err := lg.ToJSON(lg)
 	if err != nil {
 		http.Error(rw, "Unable to marshal json", http.StatusInternalServerError)
 	}

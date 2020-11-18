@@ -7,22 +7,22 @@ import (
 
 // Grower defines the structure for an API Grower
 type Grower struct {
-	ID       string
-	Name     string
-	Adress   string
-	Phone    int64
+	ID       string `json:"id"`
+	Name     string `json:"name"`
+	Adress   string `json:"address"`
+	Phone    int64  `json:"Phone"`
 	Delivery Delivery
 }
 
 // Delivery definers the structure for the refrence of the Grower
 type Delivery struct {
-	ID         int
-	DriverName string
-	Mobile     int
-	VechileNo  string
-	ItemQty    int
-	ItemName   string
-	Date       string
+	ID         int    `json:"d_id"`
+	DriverName string `json:"Driver Name"`
+	Mobile     int    `json:"mobile"`
+	VechileNo  string `json:"Vechile No."`
+	ItemQty    int    `json:"Item Qty"`
+	ItemName   string `json:"Item Name"`
+	Date       string `json:"Date"`
 }
 
 // FromJSON forms the JSON of the Grower
